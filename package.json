@@ -1,0 +1,21 @@
+{
+    "name": "weather-api",
+    "version": "1.0.0",
+    "main": "index.js",
+    "type": "commonjs",
+    "author": "xcfio",
+    "license": "MIT",
+    "scripts": {
+        "dev": "netlify dev",
+        "test": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@fastify/cors": "^11.0.1",
+        "@netlify/functions": "3.1.8",
+        "fastify": "5.3.2",
+        "serverless-http": "3.2.0"
+    },
+    "devDependencies": {
+        "@types/node": "22.15.17"
+    }
+}
