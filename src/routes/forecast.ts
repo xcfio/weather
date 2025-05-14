@@ -17,15 +17,13 @@ export async function forecast(request: FastifyRequest<{ Querystring: { location
             )
         ).json()) as any
 
-        const forecastItems = query.list
-            // .filter((_: any, index: number) => index % 8 === 0)
-            .map((item: any) => ({
-                time: new Date(item.dt * 1000).toISOString(),
-                temperature: item.main.temp,
-                description: item.weather[0].description,
-                humidity: item.main.humidity,
-                windSpeed: item.wind.speed
-            }))
+        const forecastItems = query.list.map((item: any) => ({
+            time: new Date(item.dt * 1000).toISOString(),
+            temperature: item.main.temp,
+            description: item.weather[0].description,
+            humidity: item.main.humidity,
+            windSpeed: item.wind.speed
+        }))
 
         return {
             location: query.city.name,
