@@ -106,14 +106,14 @@ Response:
     "country": "JP",
     "forecast": [
         {
-            "date": "2023-05-09",
+            "time": "2025-05-18T06:00:00.000Z",
             "temperature": 21.6,
             "description": "clear sky",
             "humidity": 65,
             "windSpeed": 2.24
         },
         {
-            "date": "2023-05-10",
+            "time": "2025-05-18T09:00:00.000Z",
             "temperature": 22.1,
             "description": "few clouds",
             "humidity": 68,
