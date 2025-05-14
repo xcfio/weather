@@ -1,9 +1,9 @@
-import { Coordinates } from "./coordinates"
+import { coordinates } from "./coordinates"
 import { ForecastData } from "../type"
 
 export async function Forecast(location: string): Promise<ForecastData> {
     try {
-        const { lat, lon } = await Coordinates(location)
+        const { lat, lon } = await coordinates(location)
 
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.OPENWEATHER_API_KEY}`

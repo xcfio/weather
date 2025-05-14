@@ -1,7 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify"
-import { Weather } from "../functions/weather"
+import { coordinates } from "../functions/coordinates"
 import { OpenWeatherData } from "../type"
-import { Coordinates } from "../functions/coordinates"
 
 export async function weather(request: FastifyRequest<{ Querystring: { location: string } }>, reply: FastifyReply) {
     try {
@@ -11,7 +10,7 @@ export async function weather(request: FastifyRequest<{ Querystring: { location:
             return reply.code(400).send({ error: "Location parameter is required" })
         }
 
-        const { lat, lon } = await Coordinates(location)
+        const { lat, lon } = await coordinates(location)
 
         const query = (await (
             await fetch(
@@ -20,8 +19,19 @@ export async function weather(request: FastifyRequest<{ Querystring: { location:
         ).json()) as OpenWeatherData
         query.cod = parseInt((query.cod as number | string).toString()) as any
 
-        const weatherData = await Weather(location)
-        return reply.code(200).send(weatherData)
+        console.log(lat, lon)
+        console.log(query)
+
+        return {
+            location: query.name,
+            country: query.sys.country,
+            temperature: query.main.temp,
+            description: query.weather[0].description,
+            feelsLike: query.main.feels_like,
+            humidity: query.main.humidity,
+            windSpeed: query.wind.speed,
+            timestamp: query.dt
+        }
     } catch (error) {
         request.log.error(error)
         return reply.code(500).send({ error: (error as Error).message })

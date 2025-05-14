@@ -1,6 +1,6 @@
 import { GeocodingResult } from "../type"
 
-export async function Coordinates(location: string): Promise<GeocodingResult> {
+export async function coordinates(location: string): Promise<GeocodingResult> {
     try {
         const response = (await (
             await fetch(
@@ -14,7 +14,7 @@ export async function Coordinates(location: string): Promise<GeocodingResult> {
             throw new Error("Location not found")
         }
 
-        const { lat, lon } = response
+        const { lat, lon } = response[0]
         return { lat, lon }
     } catch (error) {
         throw new Error(`Failed to geocode location: ${(error as Error).message}`)
