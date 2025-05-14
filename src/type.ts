@@ -52,7 +52,7 @@ export const ForecastResponseSchema = Type.Object({
     country: Type.String(),
     forecast: Type.Array(
         Type.Object({
-            date: Type.String(),
+            time: Type.String(),
             temperature: Type.Number(),
             description: Type.String(),
             humidity: Type.Number(),
