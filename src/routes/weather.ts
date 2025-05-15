@@ -19,8 +19,9 @@ export async function weather(request: FastifyRequest<{ Querystring: { location:
         ).json()) as OpenWeatherData
         query.cod = parseInt((query.cod as number | string).toString()) as any
 
-        console.log(lat, lon)
-        console.log(query)
+        if ("message" in query) {
+            return reply.code(Number(query.cod)).send({ error: query.message })
+        }
 
         return {
             location: query.name,

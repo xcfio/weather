@@ -1,5 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify"
 import { coordinates } from "../functions/coordinates"
+import { Forecast } from "../type"
 
 export async function forecast(request: FastifyRequest<{ Querystring: { location: string } }>, reply: FastifyReply) {
     try {
@@ -15,7 +16,11 @@ export async function forecast(request: FastifyRequest<{ Querystring: { location
             await fetch(
                 `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.OPENWEATHER_API_KEY}`
             )
-        ).json()) as any
+        ).json()) as Forecast
+
+        if (query.cod != 200) {
+            return reply.code(Number(query.cod)).send({ error: query.message })
+        }
 
         const forecastItems = query.list.map((item: any) => ({
             time: new Date(item.dt * 1000).toISOString(),
