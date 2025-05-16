@@ -1,20 +1,19 @@
-import { Coordinates, GeocodingResult } from "../type"
+import { CoordinatesAPI } from "../type"
 
-export async function coordinates(location: string): Promise<GeocodingResult> {
+export async function coordinates(location: string): Promise<{ lat: number; lon: number } | null> {
     try {
-        const response = (await (
+        const query = (await (
             await fetch(
                 `http://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(location)}&appid=${
                     process.env.OPENWEATHER_API_KEY
                 }`
             )
-        ).json()) as Array<Coordinates>
+        ).json()) as CoordinatesAPI
 
-        if (response.length === 0) {
-            throw new Error("Location not found")
-        }
+        if (!Array.isArray(query)) throw new Error(query.message)
+        if (!query.length) return null
 
-        const { lat, lon } = response[0]
+        const { lat, lon } = query[0]
         return { lat, lon }
     } catch (error) {
         throw new Error(`Failed to geocode location: ${(error as Error).message}`)

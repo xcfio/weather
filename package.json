@@ -10,12 +10,13 @@
         "test": "tsc --noEmit"
     },
     "dependencies": {
-        "@netlify/functions": "3.1.8",
+        "@fastify/cors": "^11.0.1",
+        "@netlify/functions": "^3.1.8",
         "@sinclair/typebox": "^0.34.33",
-        "fastify": "5.3.3",
-        "serverless-http": "3.2.0"
+        "fastify": "^5.3.3",
+        "serverless-http": "^3.2.0"
     },
     "devDependencies": {
-        "@types/node": "22.15.18"
+        "@types/node": "^22.15.18"
     }
 }

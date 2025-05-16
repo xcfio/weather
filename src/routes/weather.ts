@@ -1,27 +1,23 @@
 import { FastifyRequest, FastifyReply } from "fastify"
 import { coordinates } from "../functions/coordinates"
-import { OpenWeatherData } from "../type"
+import { WeatherAPI } from "../type"
 
 export async function weather(request: FastifyRequest<{ Querystring: { location: string } }>, reply: FastifyReply) {
     try {
         const { location } = request.query
+        if (!location) return reply.code(400).send({ error: "Location parameter is required" })
 
-        if (!location) {
-            return reply.code(400).send({ error: "Location parameter is required" })
-        }
-
-        const { lat, lon } = await coordinates(location)
+        const { lat, lon } = (await coordinates(location)) ?? {}
+        if (!lat || !lon) return reply.code(404).send({ error: "Location not found" })
 
         const query = (await (
             await fetch(
                 `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.OPENWEATHER_API_KEY}`
             )
-        ).json()) as OpenWeatherData
-        query.cod = parseInt((query.cod as number | string).toString()) as any
+        ).json()) as WeatherAPI
 
-        if ("message" in query) {
-            return reply.code(Number(query.cod)).send({ error: query.message })
-        }
+        query.cod = parseInt((query.cod as number | string).toString()) as WeatherAPI["cod"]
+        if (query.cod !== 200) return reply.code(Number(query.cod ?? 500)).send({ error: query.message })
 
         return {
             location: query.name,

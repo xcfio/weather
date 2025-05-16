@@ -60,166 +60,138 @@ export type ForecastData = {
     }>
 }
 
-export type GeocodingResult = {
-    lat: number
-    lon: number
+export type WeatherAPI = SuccessWeather | Error
+export type ForecastAPI = SuccessForecast | Error
+export type CoordinatesAPI = Array<SuccessCoordinates> | Error
+
+type code = 200 | 401 | 404 | 429 | 500 | 502 | 503 | 504
+type Error = {
+    cod: Exclude<code, 200>
+    message: string
 }
 
-export type OpenWeatherData =
-    | {
-          coord: {
-              lon: number
-              lat: number
-          }
-          weather: Array<{
-              id: number
-              main: string
-              description: string
-              icon: string
-          }>
-          base: string
-          main: {
-              temp: number
-              feels_like: number
-              temp_min: number
-              temp_max: number
-              pressure: number
-              humidity: number
-          }
-          visibility: number
-          wind: {
-              speed: number
-              deg: number
-              gust: number
-          }
-          clouds: {
-              all: number
-          }
-          dt: number
-          sys: {
-              type: number
-              id: number
-              country: string
-              sunrise: number
-              sunset: number
-          }
-          timezone: number
-          id: number
-          name: string
-          cod: 200
-      }
-    | {
-          cod: string | number
-          message: string
-      }
-
-export type Coordinates = {
+type SuccessWeather = {
+    coord: {
+        lon: number
+        lat: number
+    }
+    weather: Array<{
+        id: number
+        main: string
+        description: string
+        icon: string
+    }>
+    base: string
+    main: {
+        temp: number
+        feels_like: number
+        temp_min: number
+        temp_max: number
+        pressure: number
+        humidity: number
+    }
+    visibility: number
+    wind: {
+        speed: number
+        deg: number
+        gust: number
+    }
+    clouds: {
+        all: number
+    }
+    dt: number
+    sys: {
+        type: number
+        id: number
+        country: string
+        sunrise: number
+        sunset: number
+    }
+    timezone: number
+    id: number
     name: string
-    local_names: LocalNames
+    cod: Extract<code, 200>
+}
+
+type SuccessCoordinates = {
+    name: string
+    local_names?: {
+        et: string
+        fa: string
+        ar: string
+        ja: string
+        fr: string
+        ur: string
+        kn: string
+        ru: string
+        hi: string
+        de: string
+        uk: string
+        es: string
+        bn: string
+        en: string
+    }
     lat: number
     lon: number
     country: string
     state: string
 }
 
-export type LocalNames = {
-    et: string
-    fa: string
-    ar: string
-    ja: string
-    fr: string
-    ur: string
-    kn: string
-    ru: string
-    hi: string
-    de: string
-    uk: string
-    es: string
-    bn: string
-    en: string
-}
-
-export type Forecast = {
-    cod: 200
+export type SuccessForecast = {
+    cod: Extract<code, 200>
     message: number
     cnt: number
-    list: List[]
-    city: City
-}
-// | {
-//       cod: string | number
-//       message: string
-//   }
-
-export type City = {
-    id: number
-    name: string
-    coord: Coord
-    country: string
-    population: number
-    timezone: number
-    sunrise: number
-    sunset: number
-}
-
-export type Coord = {
-    lat: number
-    lon: number
-}
-
-export type List = {
-    dt: number
-    main: MainClass
-    weather: Weather[]
-    clouds: Clouds
-    wind: Wind
-    visibility?: number
-    pop: number
-    sys: Sys
-    dt_txt: Date
-    rain?: Record<string, number>
-}
-
-export type Clouds = {
-    all: number
-}
-
-export type MainClass = {
-    temp: number
-    feels_like: number
-    temp_min: number
-    temp_max: number
-    pressure: number
-    sea_level: number
-    grnd_level: number
-    humidity: number
-    temp_kf: number
-}
-
-export type Sys = {
-    pod: Pod
-}
-
-export enum Pod {
-    D = "d",
-    N = "n"
-}
-
-export type Weather = {
-    id: number
-    main: MainEnum
-    description: string
-    icon: string
-}
-
-export enum MainEnum {
-    Clear = "Clear",
-    Clouds = "Clouds",
-    Rain = "Rain"
-}
-
-export type Wind = {
-    speed: number
-    deg: number
-    gust: number
+    list: Array<{
+        dt: number
+        main: {
+            temp: number
+            feels_like: number
+            temp_min: number
+            temp_max: number
+            pressure: number
+            sea_level: number
+            grnd_level: number
+            humidity: number
+            temp_kf: number
+        }
+        weather: Array<{
+            id: number
+            main: "Clear" | "Clouds" | "Rain"
+            description: string
+            icon: string
+        }>
+        clouds: {
+            all: number
+        }
+        wind: {
+            speed: number
+            deg: number
+            gust: number
+        }
+        visibility?: number
+        pop: 0 | 1
+        sys: {
+            pod: "d" | "n"
+        }
+        dt_txt: string
+        rain?: {
+            "3h": number
+        }
+        snow?: {
+            "3h": number
+        }
+    }>
+    city: {
+        id: number
+        name: string
+        coord: {
+            lat: number
+            lon: number
+        }
+        country: string
+        population: number
+        timezone: number
+        sunrise: number
+        sunset: number
+    }
 }
