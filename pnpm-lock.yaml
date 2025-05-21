@@ -12,20 +12,20 @@ importers:
         specifier: ^11.0.1
         version: 11.0.1
       '@netlify/functions':
-        specifier: 3.1.8
+        specifier: ^3.1.8
         version: 3.1.8
       '@sinclair/typebox':
         specifier: ^0.34.33
         version: 0.34.33
       fastify:
-        specifier: 5.3.3
+        specifier: ^5.3.3
         version: 5.3.3
       serverless-http:
-        specifier: 3.2.0
+        specifier: ^3.2.0
         version: 3.2.0
     devDependencies:
       '@types/node':
-        specifier: 22.15.18
+        specifier: ^22.15.18
         version: 22.15.18
 
 packages:

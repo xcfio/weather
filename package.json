@@ -1,13 +1,28 @@
 {
     "name": "weather-api",
     "version": "1.0.0",
-    "main": "index.js",
-    "type": "commonjs",
+    "description": "A simple weather API using Fastify and TypeScript",
     "author": "xcfio",
+    "homepage": "https://github.com/xcfio/weather#readme",
+    "type": "commonjs",
     "license": "MIT",
     "scripts": {
         "dev": "netlify dev",
         "test": "tsc --noEmit"
+    },
+    "engines": {
+        "node": ">=22.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/xcfio/weather"
+    },
+    "bugs": {
+        "url": "https://github.com/xcfio/weather/issues"
+    },
+    "funding": {
+        "type": "patreon",
+        "url": "https://www.patreon.com/xcfio"
     },
     "dependencies": {
         "@fastify/cors": "^11.0.1",
