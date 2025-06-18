@@ -26,7 +26,7 @@
     },
     "dependencies": {
         "@fastify/cors": "^11.0.1",
-        "@netlify/functions": "^4.1.2",
+        "@netlify/functions": "^4.1.5",
         "@sinclair/typebox": "^0.34.33",
         "fastify": "^5.3.3",
         "serverless-http": "^3.2.0"
