@@ -21,8 +21,8 @@ importers:
         specifier: ^5.5.0
         version: 5.5.0
       serverless-http:
-        specifier: ^3.2.0
-        version: 3.2.0
+        specifier: ^4.0.0
+        version: 4.0.0
     devDependencies:
       '@types/node':
         specifier: ^24.3.0
@@ -1334,8 +1334,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  serverless-http@3.2.0:
-    resolution: {integrity: sha512-QvSyZXljRLIGqwcJ4xsKJXwkZnAVkse1OajepxfjkBXV0BMvRS5R546Z4kCBI8IygDzkQY0foNPC/rnipaE9pQ==}
+  serverless-http@4.0.0:
+    resolution: {integrity: sha512-KKl9h1+VApX9y2vHsVMogf906UXBwO3FDYiWPzqS0mCjEEx4Sx91JrssbWA7RN43HBuxrtoh8MkocZPvjyGnLg==}
     engines: {node: '>=12.0'}
 
   set-cookie-parser@2.7.1:
@@ -2896,7 +2896,7 @@ snapshots:
 
   semver@7.7.2: {}
 
-  serverless-http@3.2.0: {}
+  serverless-http@4.0.0: {}
 
   set-cookie-parser@2.7.1: {}
 
