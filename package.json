@@ -29,7 +29,7 @@
         "@netlify/functions": "^4.2.4",
         "@sinclair/typebox": "^0.34.40",
         "fastify": "^5.5.0",
-        "serverless-http": "^3.2.0"
+        "serverless-http": "^4.0.0"
     },
     "devDependencies": {
         "@types/node": "^24.3.0"
