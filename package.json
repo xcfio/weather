@@ -32,6 +32,6 @@
         "serverless-http": "^3.2.0"
     },
     "devDependencies": {
-        "@types/node": "^24.3.0"
+        "@types/node": "^24.3.1"
     }
 }
