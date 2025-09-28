@@ -1,4 +1,4 @@
-import { ErrorResponseSchema, ForecastResponseSchema, WeatherResponseSchema } from "./type"
+import { ErrorResponseSchema, ForecastResponseSchema } from "./type"
 import { forecast } from "./routes/forecast"
 import { weather } from "./routes/weather"
 import { Type } from "@sinclair/typebox"
